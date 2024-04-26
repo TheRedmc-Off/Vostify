@@ -17,7 +17,7 @@ Ce script a été conçu pour faciliter le visionnage des animes en VOSTFR (en u
 
 ## Installation & Execution
 
-* 1) Installez Vostify depuis sa source
+1) Installez Vostify depuis sa source
 
 ```bash
    git clone https://github.com/TheRedmc-Off/Vostify.git
@@ -31,7 +31,7 @@ Ce script a été conçu pour faciliter le visionnage des animes en VOSTFR (en u
    python vostify.py
 ```
 
-* Téléchargez la dernière version compilée
+Téléchargez la dernière version compilée
 
 ## Contribution
 
