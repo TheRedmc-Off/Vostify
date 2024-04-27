@@ -1,19 +1,19 @@
 # coding:utf-8
 
-# Credits:
+# Crédits:
 
-# Original software: ani-cli by pystardust: https://github.com/pystardust/ani-cli
-# Fork of the original software: ani-cli by KrishenK0: https://github.com/KrishenK0/ani-cli
-# This project was build with KrishenK0's ani-cli as a base, and adapted to run on windows.
-# The name "Vostify" was chosen by me, and like i said earlier, i didn't create this program from scratch.
-# Author: TheRedmc-Off
+# Script d'origine : ani-cli de pystardust: https://github.com/pystardust/ani-cli
+# Fork du script d'origine : ani-cli de KrishenK0: https://github.com/KrishenK0/ani-cli
 
-# Other informations:
+# Ce projet est basé sur ani-cli de KrishenK0 et adapté pour fonctionner sur Windows.
+# Auteur : TheRedmc-Off (TheRedmc_)
 
-# License: MIT License
+# Autres infos:
+
+# Licence: MIT
 # Version: 1.2
-# Description: Script permitting to watch animes in VOSTFR (Using Mavanimes.cc)
-# Usage: python vostify.py or run the compiled file
+# Description: Script permettant de regarder des animes en VOSTFR (Utilisant Mavanimes.cc comme source)
+# Utilisation: "python vostify.py" / Executer le fichier "vostify.exe"
 
 # Début du script
 
