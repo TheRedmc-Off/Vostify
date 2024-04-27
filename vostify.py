@@ -215,19 +215,18 @@ def menu():
 
 @click.command()
 def main():
-    os.system('cls')
+    os.system('cls' if os.name == 'nt' else 'clear')
     print(banner)
     animes = menu()
-    os.system('cls')
+    os.system('cls' if os.name == 'nt' else 'clear')
     print(banner)
     animeUrl = anime_list(animes)
-    os.system('cls')
+    os.system('cls' if os.name == 'nt' else 'clear')
     print(banner)
     episodeUrl = episode_list(animeUrl)
-    os.system('cls')
+    os.system('cls' if os.name == 'nt' else 'clear')
     print(banner)
     openAnime(episodeUrl)
-
 
 if __name__ == '__main__':
     main()
