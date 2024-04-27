@@ -11,7 +11,7 @@
 # Other informations:
 
 # License: MIT License
-# Version: 1.1
+# Version: 1.2
 # Description: Script permitting to watch animes in VOSTFR (Using Mavanimes.cc)
 # Usage: python vostify.py or run the compiled file
 
@@ -32,13 +32,24 @@ from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.chrome.service import Service
 import time
 import html
+import tempfile
+import shutil
+import pkg_resources
 
 # Initialisation
 
 os.environ["PATH"] = os.path.dirname(__file__) + os.pathsep + os.environ["PATH"]
+temp_dir = tempfile.mkdtemp()
 
 base_url = 'http://mavanimes.cc'
 headers = {"x-requested-with": "XMLHttpRequest"}
+
+# Extraction des extensions
+
+with open(os.path.join(temp_dir, 'ublock_origin.crx'), 'wb') as f:
+    f.write(pkg_resources.resource_string(__name__, 'ublock_origin.crx'))
+with open(os.path.join(temp_dir, 'redirect_blocker.crx'), 'wb') as f:
+    f.write(pkg_resources.resource_string(__name__, 'redirect_blocker.crx'))
 
 class bcolors:
     HEADER = '\033[95m'
@@ -61,7 +72,7 @@ banner = f"""{bcolors.END}
 |   |   |.-----.-----.|  |_|__|.'  _|.--.--.
 |   |   ||  _  |__ --||   _|  ||   _||  |  |
  \_____/ |_____|_____||____|__||__|  |___  |
-                ---V1.1---           |_____|
+                ---V1.2---           |_____|
 """
 
 # Fonctions principales
@@ -108,9 +119,9 @@ def openAnime(anime_url, browser='firefox'):
             chrome_options.add_argument('--verbose')
             chrome_options.add_argument('--disable-software-rasterizer')
             chrome_options.add_argument('--kiosk')
-            chrome_options.add_extension('./ublock_origin.crx')
-            chrome_options.add_extension('./redirect_blocker.crx')
-            
+            chrome_options.add_extension(os.path.join(temp_dir, 'ublock_origin.crx'))
+            chrome_options.add_extension(os.path.join(temp_dir, 'redirect_blocker.crx'))
+
 
             print(f"{bcolors.OKGREEN}[+] Chargement du stream...{bcolors.END}")
             
@@ -121,10 +132,12 @@ def openAnime(anime_url, browser='firefox'):
             driver.get(url_to_open)
             input(f"{bcolors.OKGREEN}[+] Appuyez sur la touche Entrée pour fermer le programme. \n{bcolors.END}")
             print(f"{bcolors.OKGREEN}[X] Fermeture du programme en cours, veuillez patienter...{bcolors.END}")
+            shutil.rmtree(temp_dir)
             driver.quit()
             sys.exit()
         
     print(f"{bcolors.OKGREEN}[X] Closed{bcolors.END}")
+    shutil.rmtree(temp_dir)
     driver.quit()
     sys.exit()
 
@@ -202,16 +215,16 @@ def menu():
 
 @click.command()
 def main():
-    os.system('cls' if os.name == 'nt' else 'clear')
+    os.system('cls')
     print(banner)
     animes = menu()
-    os.system('cls' if os.name == 'nt' else 'clear')
+    os.system('cls')
     print(banner)
     animeUrl = anime_list(animes)
-    os.system('cls' if os.name == 'nt' else 'clear')
+    os.system('cls')
     print(banner)
     episodeUrl = episode_list(animeUrl)
-    os.system('cls' if os.name == 'nt' else 'clear')
+    os.system('cls')
     print(banner)
     openAnime(episodeUrl)
 
