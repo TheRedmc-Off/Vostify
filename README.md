@@ -44,3 +44,7 @@ Vous pouvez également m'envoyer un email : theo.herbst.mail@gmail.com
 ## Extensions
 
 Comme vous pouvez le voir, 2 extensions sont préinstallées au lancement du web-player: uBlock origin pour les pubs et Redirect Blocker pour éviter les sites peu recommandables.
+
+# TODO List
+
+* Vérifier si tous les packages sont installés au lancement, et si ils ne le sont pas, les installer depuis le fichier de req.
