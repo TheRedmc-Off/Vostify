@@ -11,7 +11,7 @@
 # Autres infos:
 
 # Licence: MIT
-# Version: 1.2
+# Version: 1.2.5
 # Description: Script permettant de regarder des animes en VOSTFR (Utilisant Mavanimes.cc comme source)
 # Utilisation: "python vostify.py" / Executer le fichier "vostify.exe"
 
@@ -79,7 +79,7 @@ banner = f"""{bcolors.END}
 |   |   |.-----.-----.|  |_|__|.'  _|.--.--.
 |   |   ||  _  |__ --||   _|  ||   _||  |  |
  \_____/ |_____|_____||____|__||__|  |___  |
-                ---V1.2---           |_____|
+               ---V1.2.5---          |_____|
 """
 
 # Fonctions principales
