@@ -47,4 +47,4 @@ Comme vous pouvez le voir, 2 extensions sont préinstallées au lancement du web
 
 ## To-do List
 
-* Vérifier si tous les packages sont installés au lancement, et si ils ne le sont pas, les installer depuis le fichier de req.
+* Rien pour le moment.

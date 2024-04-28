@@ -17,24 +17,45 @@
 
 # Début du script
 
-import click
-import os
-import re
-import sys
-import requests
-from bs4 import BeautifulSoup
-from selenium import webdriver
-from selenium.webdriver.chrome.options import Options
-from webdriver_manager.chrome import ChromeDriverManager
-from selenium.webdriver.common.by import By
-from selenium.webdriver.support import expected_conditions as EC
-from selenium.webdriver.support.wait import WebDriverWait
-from selenium.webdriver.chrome.service import Service
-import time
-import html
-import tempfile
-import shutil
-import pkg_resources
+class bcolors:
+    HEADER = '\033[95m'
+    OKBLUE = '\033[94m'
+    OKCYAN = '\033[96m'
+    OKYELLOW = '\033[93m'
+    OKGREEN = '\033[92m'
+    WARNING = '\033[93m'
+    FAIL = '\033[91m'
+    END = '\033[0m'
+    BOLD = '\033[1m'
+    FAIT = '\033[2m'
+    ITALIC = '\033[3m'
+    UNDERLINE = '\033[4m'
+
+try:
+    import click
+    import os
+    import re
+    import sys
+    import requests
+    from bs4 import BeautifulSoup
+    from selenium import webdriver
+    from selenium.webdriver.chrome.options import Options
+    from webdriver_manager.chrome import ChromeDriverManager
+    from selenium.webdriver.common.by import By
+    from selenium.webdriver.support import expected_conditions as EC
+    from selenium.webdriver.support.wait import WebDriverWait
+    from selenium.webdriver.chrome.service import Service
+    import time
+    import html
+    import tempfile
+    import shutil
+    import pkg_resources
+
+except ImportError:
+    print(f"{bcolors.FAIL}[-] Erreur lors de l'importation des modules, installation en cours...{bcolors.END}")
+    os.system('pip install click requests beautifulsoup4 selenium webdriver_manager')
+    print(f"{bcolors.OKGREEN}\n[+] Installation terminée, veuillez relancer le programme.{bcolors.END}")
+    sys.exit()
 
 # Initialisation
 
@@ -50,20 +71,6 @@ with open(os.path.join(temp_dir, 'ublock_origin.crx'), 'wb') as f:
     f.write(pkg_resources.resource_string(__name__, 'ublock_origin.crx'))
 with open(os.path.join(temp_dir, 'redirect_blocker.crx'), 'wb') as f:
     f.write(pkg_resources.resource_string(__name__, 'redirect_blocker.crx'))
-
-class bcolors:
-    HEADER = '\033[95m'
-    OKBLUE = '\033[94m'
-    OKCYAN = '\033[96m'
-    OKYELLOW = '\033[93m'
-    OKGREEN = '\033[92m'
-    WARNING = '\033[93m'
-    FAIL = '\033[91m'
-    END = '\033[0m'
-    BOLD = '\033[1m'
-    FAIT = '\033[2m'
-    ITALIC = '\033[3m'
-    UNDERLINE = '\033[4m'
 
 # Bannière
 
@@ -83,15 +90,12 @@ def openAnime(anime_url, browser='firefox'):
         options = ChromeOptions()
         options.add_argument('log-level=3')  # Montre les logs importants
         options.add_experimental_option('excludeSwitches', ['enable-logging'])  # Désactiver les avertissements webtools
-        options.headless = True
-
+        options.add_argument('--headless')
         driver = Chrome(options=options)
     else:
         from selenium.webdriver import Firefox, FirefoxOptions
         options = FirefoxOptions()
-        options.add_argument('log-level=3')  # Montrer les logs importants
-        options.headless = True
-
+        options.add_argument('--headless')
         driver = Firefox(options=options)
 
     driver.get(base_url + anime_url)
@@ -131,12 +135,12 @@ def openAnime(anime_url, browser='firefox'):
             print(f"{bcolors.OKGREEN}[+] Ouverture de l'url...{bcolors.END}")
             driver.get(url_to_open)
             input(f"{bcolors.OKGREEN}[+] Appuyez sur la touche Entrée pour fermer le programme. \n{bcolors.END}")
-            print(f"{bcolors.OKGREEN}[X] Fermeture du programme en cours, veuillez patienter...{bcolors.END}")
+            print(f"{bcolors.WARNING}[X] Fermeture du programme en cours, veuillez patienter...{bcolors.END}")
             shutil.rmtree(temp_dir)
             driver.quit()
             sys.exit()
         
-    print(f"{bcolors.OKGREEN}[X] Closed{bcolors.END}")
+    print(f"{bcolors.WARNING}[X] Closed{bcolors.END}")
     shutil.rmtree(temp_dir)
     driver.quit()
     sys.exit()
